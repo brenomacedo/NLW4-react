@@ -1,11 +1,11 @@
-import Head from 'next/head'
+import ChallangesProvider from '../contexts/ChallangesContext'
 import '../styles/global.css'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div>
-      <Component {...pageProps} />
-    </div>
+      <ChallangesProvider>
+        <Component {...pageProps} />
+      </ChallangesProvider>
   )
 }
 

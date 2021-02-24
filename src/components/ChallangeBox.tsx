@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import ChallangesContext from '../contexts/ChallangesContext'
 import styles from '../styles/components/ChallangeBox.module.css'
 
 export default function ChallangeBox() {
