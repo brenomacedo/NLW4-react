@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from '../styles/components/Countdown.module.css'
 import { FaCheckCircle, FaClock, FaTimes } from 'react-icons/fa'
+import { ChallangesContext } from '../contexts/ChallangesContext'
 
 let countdownTimeOut: NodeJS.Timeout
 
 export default function Countdown() {
+
+    const { startNewChallange } = useContext(ChallangesContext)
 
     const [time, setTime] = useState(0.05 * 60)
     const [isActive, setIsActive] = useState(false)
@@ -17,6 +20,7 @@ export default function Countdown() {
             }, 1000)
         } else if(isActive && time === 0) {
             setHasFinished(true)
+            startNewChallange()
             setIsActive(false)
         }
     }, [isActive, time])
