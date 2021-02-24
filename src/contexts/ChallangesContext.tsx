@@ -15,6 +15,7 @@ interface ChallangesContextData {
     startNewChallange: () => void
     activeChallange: Challange
     resetChallange: () => void
+    experienceNextLevel: number
 }
 
 const ChallangesContext = createContext<ChallangesContextData>({} as any)
@@ -26,6 +27,8 @@ const ChallangesProvider:FC = ({ children }) => {
     const [challangesCompleted, setChallangesCompleted] = useState(0)
 
     const [activeChallange, setActiveChallange] = useState(null)
+
+    const experienceNextLevel = Math.pow((level + 1)*4,2)
 
     function startNewChallange() {
         const randomChallangeIndex = Math.floor(Math.random() * challanges.length)
@@ -44,7 +47,7 @@ const ChallangesProvider:FC = ({ children }) => {
 
     return (
         <ChallangesContext.Provider value={{ level, currentExperience, challangesCompleted,
-        startNewChallange, levelUp, activeChallange, resetChallange }}>
+        startNewChallange, levelUp, activeChallange, resetChallange, experienceNextLevel }}>
             {children}
         </ChallangesContext.Provider>
     )
