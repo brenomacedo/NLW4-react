@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import styles from '../styles/components/Countdown.module.css'
+import { FaCheckCircle, FaClock, FaTimes } from 'react-icons/fa'
 
 let countdownTimeOut: NodeJS.Timeout
 
 export default function Countdown() {
 
-    const [time, setTime] = useState(25 * 60)
+    const [time, setTime] = useState(0.05 * 60)
     const [isActive, setIsActive] = useState(false)
     const [hasFinished, setHasFinished] = useState(false)
 
@@ -53,7 +54,7 @@ export default function Countdown() {
             {hasFinished ? (
                 <button disabled className={`${styles.start} ${styles.buttonContainer}`}>
                     <div className={`${styles.buttonAbove} ${styles.BAFinished}`}>
-                        Ciclo encerrado
+                        Ciclo encerrado <FaCheckCircle color='#4cd62b' size={20} style={{ marginLeft: 10 }} />
                     </div>
                 </button>
             ) : (
@@ -61,14 +62,14 @@ export default function Countdown() {
                     <button type="button" onClick={resetCountDown}
                     className={`${styles.start} ${styles.active} ${styles.buttonContainer}`}>
                         <div className={`${styles.buttonAbove} ${styles.BAStop}`}>
-                            Abandonar ciclo
+                            Abandonar ciclo <FaTimes color='#e83f5b' size={20} style={{ marginLeft: 10 }} />
                         </div>
                     </button>
                 ) : (
                     <button type="button" onClick={startCountDown}
                     className={`${styles.start} ${styles.buttonContainer}`}>
                         <div className={`${styles.buttonAbove} ${styles.BAStart}`}>
-                            Iniciar um ciclo
+                            Iniciar um ciclo <FaClock color='white' size={20} style={{ marginLeft: 10 }} />
                         </div>
                     </button>
                 )
