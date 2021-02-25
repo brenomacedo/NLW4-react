@@ -1,45 +1,17 @@
 import { useContext, useEffect, useState } from 'react'
 import styles from '../styles/components/Countdown.module.css'
 import { FaCheckCircle, FaClock, FaTimes } from 'react-icons/fa'
-import { ChallangesContext } from '../contexts/ChallangesContext'
-
-let countdownTimeOut: NodeJS.Timeout
+import { CountdownContext } from '../contexts/CountdownContext'
 
 export default function Countdown() {
 
-    const { startNewChallange } = useContext(ChallangesContext)
+    const { minutes, seconds, hasFinished, isActive,
+        resetCountdown, startCountdown } = useContext(CountdownContext)
 
-    const [time, setTime] = useState(0.05 * 60)
-    const [isActive, setIsActive] = useState(false)
-    const [hasFinished, setHasFinished] = useState(false)
-
-    useEffect(() => {
-        if(isActive && time > 0) {
-            countdownTimeOut = setTimeout(() => {
-                setTime(time - 1)    
-            }, 1000)
-        } else if(isActive && time === 0) {
-            setHasFinished(true)
-            startNewChallange()
-            setIsActive(false)
-        }
-    }, [isActive, time])
-
-    const minutes = Math.floor(time / 60)
-    const seconds = time % 60
 
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('')
     const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('')
 
-    function startCountDown() {
-        setIsActive(true)
-    }
-
-    function resetCountDown() {
-        setIsActive(false)
-        clearTimeout(countdownTimeOut)
-        setTime(25 * 60)
-    }
 
     return (
         <div>
@@ -63,14 +35,14 @@ export default function Countdown() {
                 </button>
             ) : (
                 isActive ? (
-                    <button type="button" onClick={resetCountDown}
+                    <button type="button" onClick={resetCountdown}
                     className={`${styles.start} ${styles.active} ${styles.buttonContainer}`}>
                         <div className={`${styles.buttonAbove} ${styles.BAStop}`}>
                             Abandonar ciclo <FaTimes color='#e83f5b' size={20} style={{ marginLeft: 10 }} />
                         </div>
                     </button>
                 ) : (
-                    <button type="button" onClick={startCountDown}
+                    <button type="button" onClick={startCountdown}
                     className={`${styles.start} ${styles.buttonContainer}`}>
                         <div className={`${styles.buttonAbove} ${styles.BAStart}`}>
                             Iniciar um ciclo <FaClock color='white' size={20} style={{ marginLeft: 10 }} />

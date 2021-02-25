@@ -1,6 +1,7 @@
 .experienceBar {
     display: flex;
     align-items: center;
+    transition: 0.5s;
 }
 
 .experienceBar span {
@@ -26,4 +27,5 @@ span.currentExperience {
     position: absolute;
     top: 12px;
     transform: translateX(-50%);
+    transition: 0.5s;
 }
