@@ -1,5 +1,7 @@
 import { createContext, FC, useEffect, useState } from 'react'
 import challanges from '../../challanges.json'
+import cookies from 'js-cookie'
+import LevelUpModal from '../components/LevelUpModal'
 
 interface Challange {
     type: 'body' | 'eye'
@@ -16,16 +18,22 @@ interface ChallangesContextData {
     activeChallange: Challange
     resetChallange: () => void
     experienceNextLevel: number
-    completeChallange: () => void
+    completeChallange: () => void   
+}
+
+interface ChallangesProviderData {
+    initialLevel: number
+    initialCurrentExperience: number
+    initialChallangesCompleted: number
 }
 
 const ChallangesContext = createContext<ChallangesContextData>({} as any)
 
-const ChallangesProvider:FC = ({ children }) => {
+const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel, initialCurrentExperience, initialChallangesCompleted }) => {
 
-    const [level, setLevel] = useState(1)
-    const [currentExperience, setCurrentExperience] = useState(0)
-    const [challangesCompleted, setChallangesCompleted] = useState(0)
+    const [level, setLevel] = useState(initialLevel ?? 1)
+    const [currentExperience, setCurrentExperience] = useState(initialCurrentExperience ?? 0)
+    const [challangesCompleted, setChallangesCompleted] = useState(initialChallangesCompleted ?? 0)
 
     const [activeChallange, setActiveChallange] = useState(null)
 
@@ -34,6 +42,12 @@ const ChallangesProvider:FC = ({ children }) => {
     useEffect(() => {
         Notification.requestPermission()
     }, [])
+
+    useEffect(() => {
+        cookies.set('level', `${level}`)
+        cookies.set('currentExperience', `${currentExperience}`)
+        cookies.set('challangesCompleted', `${challangesCompleted}`)
+    }, [level, currentExperience, challangesCompleted])
 
     function startNewChallange() {
         const randomChallangeIndex = Math.floor(Math.random() * challanges.length)
@@ -82,6 +96,8 @@ const ChallangesProvider:FC = ({ children }) => {
         startNewChallange, levelUp, activeChallange, resetChallange, experienceNextLevel,
         completeChallange }}>
             {children}
+
+            <LevelUpModal />
         </ChallangesContext.Provider>
     )
 }
