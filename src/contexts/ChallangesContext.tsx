@@ -18,7 +18,8 @@ interface ChallangesContextData {
     activeChallange: Challange
     resetChallange: () => void
     experienceNextLevel: number
-    completeChallange: () => void   
+    completeChallange: () => void
+    closeModal: () => void
 }
 
 interface ChallangesProviderData {
@@ -36,6 +37,8 @@ const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel,
     const [challangesCompleted, setChallangesCompleted] = useState(initialChallangesCompleted ?? 0)
 
     const [activeChallange, setActiveChallange] = useState(null)
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const experienceNextLevel = Math.pow((level + 1)*4,2)
 
@@ -64,8 +67,13 @@ const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel,
         }
     }
 
+    function closeModal() {
+        setIsModalOpen(false)
+    }
+
     function levelUp() {
         setLevel(level + 1)
+        setIsModalOpen(true)
     }
 
     function resetChallange() {
@@ -94,10 +102,10 @@ const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel,
     return (
         <ChallangesContext.Provider value={{ level, currentExperience, challangesCompleted,
         startNewChallange, levelUp, activeChallange, resetChallange, experienceNextLevel,
-        completeChallange }}>
+        completeChallange, closeModal }}>
             {children}
 
-            <LevelUpModal />
+            {isModalOpen && <LevelUpModal />}
         </ChallangesContext.Provider>
     )
 }
