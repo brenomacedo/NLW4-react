@@ -80,3 +80,15 @@
     align-items: center;
     font-size: 14px;
 }
+
+@media (max-width: 810px) {
+    .challanges {
+        display: none;
+    }
+}
+
+@media (max-width: 630px) {
+    .xp {
+        display: none;
+    }
+}
