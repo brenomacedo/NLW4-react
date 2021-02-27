@@ -1,6 +1,7 @@
 import styles from '../styles/pages/Login.module.css'
 import { FaGithub, FaArrowRight } from 'react-icons/fa'
 import { useState } from 'react'
+import Head from 'next/head'
 
 export default function Login() {
 
@@ -8,6 +9,9 @@ export default function Login() {
     
     return (
         <div className={styles.container}>
+            <Head>
+                <title>Login | Move it</title>
+            </Head>
             <div className={styles.banner}>
                 <div className={styles.bannerImage} />
             </div>

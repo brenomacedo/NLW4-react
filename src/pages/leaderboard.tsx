@@ -1,10 +1,14 @@
 import Sidebar from '../components/Sidebar'
-import LeaderboardItem from '../styles/components/LeaderboardItem'
+import LeaderboardItem from '../components/LeaderboardItem'
 import styles from '../styles/pages/Leaderboard.module.css'
+import Head from 'next/head'
 
 export default function Leaderboard() {
     return (
         <div className={styles.leaderboardContainer}>
+            <Head>
+                <title>Leaderboard | Move it</title>
+            </Head>
             <Sidebar page="leaderboard" />
             <div className={styles.container}>
                 <div className={styles.grid}>

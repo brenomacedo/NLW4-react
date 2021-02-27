@@ -1,4 +1,4 @@
-import styles from '../../styles/components/LeaderboardItem.module.css'
+import styles from '../styles/components/LeaderboardItem.module.css'
 
 export default function LeaderboardItem() {
     return (
