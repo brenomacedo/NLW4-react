@@ -1,3 +1,7 @@
+.homeContainer {
+    display: flex;
+}
+
 .container {
     height: 100vh;
     max-width: 992px;
@@ -6,6 +10,7 @@
 
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .container section {

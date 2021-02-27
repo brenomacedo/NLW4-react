@@ -8,6 +8,7 @@ import Head from 'next/head'
 import CountdownProvider from "../contexts/CountdownContext";
 import { GetServerSideProps } from "next";
 import ChallangesProvider from "../contexts/ChallangesContext";
+import Sidebar from "../components/Sidebar";
 
 interface HomeProps {
   level: number
@@ -17,29 +18,32 @@ interface HomeProps {
 
 export default function Home({ level, currentExperience, challangesCompleted }: HomeProps) {
   return (
-    <ChallangesProvider initialLevel={level} initialCurrentExperience={currentExperience}
-    initialChallangesCompleted={challangesCompleted}>
-      <div className={styles.container}>
+    <div className={styles.homeContainer}>
+      <Sidebar page="home" />
+      <ChallangesProvider initialLevel={level} initialCurrentExperience={currentExperience}
+      initialChallangesCompleted={challangesCompleted}>
+        <div className={styles.container}>
 
-        <Head>
-          <title>Inicio | Move it</title>
-        </Head>
+          <Head>
+            <title>Inicio | Move it</title>
+          </Head>
 
-        <ExperienceBar />
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallanges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallangeBox />
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallangesProvider>
+          <ExperienceBar />
+          <CountdownProvider>
+            <section>
+              <div>
+                <Profile />
+                <CompletedChallanges />
+                <Countdown />
+              </div>
+              <div>
+                <ChallangeBox />
+              </div>
+            </section>
+          </CountdownProvider>
+        </div>
+      </ChallangesProvider>
+    </div>
   )
 }
 
