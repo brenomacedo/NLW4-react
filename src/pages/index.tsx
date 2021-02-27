@@ -1,57 +1,28 @@
-import CompletedChallanges from "../components/CompletedChallanges";
-import ChallangeBox from "../components/ChallangeBox";
-import Countdown from "../components/Countdown";
-import ExperienceBar from "../components/ExperienceBar";
-import Profile from "../components/Profile";
-import styles from '../styles/pages/Home.module.css'
-import Head from 'next/head'
-import CountdownProvider from "../contexts/CountdownContext";
-import { GetServerSideProps } from "next";
-import ChallangesProvider from "../contexts/ChallangesContext";
+import styles from '../styles/pages/Login.module.css'
+import { FaGithub, FaArrowRight } from 'react-icons/fa'
 
-interface HomeProps {
-  level: number
-  currentExperience: number
-  challangesCompleted: number
-}
-
-export default function Home({ level, currentExperience, challangesCompleted }: HomeProps) {
-  return (
-    <ChallangesProvider initialLevel={level} initialCurrentExperience={currentExperience}
-    initialChallangesCompleted={challangesCompleted}>
-      <div className={styles.container}>
-
-        <Head>
-          <title>Inicio | Move it</title>
-        </Head>
-
-        <ExperienceBar />
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallanges />
-              <Countdown />
+export default function Login() {
+    return (
+        <div className={styles.container}>
+            <div className={styles.banner}>
+                <div className={styles.bannerImage} />
             </div>
-            <div>
-              <ChallangeBox />
+            <div className={styles.form}>
+                <form>
+                    <div className={styles.formBanner} />
+                    <h3>Bem-vindo</h3>
+                    <div className={styles.formDescription}>
+                        <FaGithub size={40} color="#b2b9ff" />
+                        <p>Faça login com seu Github <br/> para começar</p>
+                    </div>
+                    <div className={styles.input}>
+                        <input placeholder="Digite seu username" type="text"/>
+                        <button>
+                            <FaArrowRight color='white' size={20} />
+                        </button>
+                    </div>
+                </form>
             </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallangesProvider>
-  )
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-
-  const { level, currentExperience, challangesCompleted } = context.req.cookies
-
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challangesCompleted: Number(challangesCompleted)
-    }
-  }
+        </div>
+    )
 }
