@@ -1,0 +1,82 @@
+.container {
+    display: flex;
+    margin-top: 5px;
+}
+
+.container strong {
+    color: var(--blue);
+}
+
+.level {
+    width: 72px;
+    height: 96px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+}
+
+.user {
+    flex: 1;
+    background-color: white;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 96px;
+    display: flex;
+    padding-left: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user .userPicture {
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    background-color: red;
+}
+
+.userDescription {
+    margin-left: 20px;
+}
+
+.userDescription p {
+    color: var(--title);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.userDescription span {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.userDescription img {
+    width: 14px;
+    margin-right: 5px;
+}
+
+.challanges {
+    width: 140px;
+    background-color: white;
+    height: 96px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 14px;
+}
+
+.xp {
+    width: 140px;
+    background-color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 96px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 14px;
+}
