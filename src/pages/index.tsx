@@ -1,7 +1,11 @@
 import styles from '../styles/pages/Login.module.css'
 import { FaGithub, FaArrowRight } from 'react-icons/fa'
+import { useState } from 'react'
 
 export default function Login() {
+
+    const [username, setUsername] = useState("")    
+    
     return (
         <div className={styles.container}>
             <div className={styles.banner}>
@@ -16,8 +20,11 @@ export default function Login() {
                         <p>Faça login com seu Github <br/> para começar</p>
                     </div>
                     <div className={styles.input}>
-                        <input placeholder="Digite seu username" type="text"/>
-                        <button>
+                        <input value={username} onChange={e => setUsername(e.target.value)}
+                        placeholder="Digite seu username" type="text"/>
+                        <button style={{
+                            backgroundColor: username ? "#4cd62b" : "#4953b8"
+                        }}>
                             <FaArrowRight color='white' size={20} />
                         </button>
                     </div>
