@@ -6,6 +6,9 @@ class User {
     id: number
 
     @Column()
+    sub: number
+
+    @Column()
     name: string
 
     @Column()

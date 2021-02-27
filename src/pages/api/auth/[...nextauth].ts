@@ -13,5 +13,11 @@ export default (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res,
     secret: process.env.SECRET,
     jwt: {
         secret: process.env.JWT
+    },
+    callbacks: {
+        session: async (session, user) => {
+            const userAny = user as any
+            return Promise.resolve({...session, userId: userAny.sub})
+        }
     }
 })

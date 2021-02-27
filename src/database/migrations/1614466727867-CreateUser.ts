@@ -13,6 +13,9 @@ export class CreateUser1614466727867 implements MigrationInterface {
                     isGenerated: true,
                     generationStrategy: 'increment'
                 }, {
+                    name: 'sub',
+                    type: 'integer'
+                }, {
                     name: 'name',
                     type: 'varchar'
                 }, {
