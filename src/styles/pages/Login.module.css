@@ -58,7 +58,7 @@
     margin-top: 50px;
 }
 
-.input input {
+.input div {
     background: linear-gradient(90deg, #4953B8 0%, rgba(73, 83, 184, 0.2) 100%);
     border: 0;
     border-top-left-radius: 5px;
@@ -78,6 +78,12 @@
     border-bottom-right-radius: 5px;
     border: 0;
     background-color: var(--blue-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,11 +1,13 @@
 import styles from '../styles/pages/Login.module.css'
 import { FaGithub, FaArrowRight } from 'react-icons/fa'
-import { useState } from 'react'
 import Head from 'next/head'
+import { signIn } from 'next-auth/client'
 
 export default function Login() {
 
-    const [username, setUsername] = useState("")    
+    function login() {
+        signIn('github', { callbackUrl: 'http://localhost:3000/home' })
+    }
     
     return (
         <div className={styles.container}>
@@ -24,11 +26,10 @@ export default function Login() {
                         <p>Faça login com seu Github <br/> para começar</p>
                     </div>
                     <div className={styles.input}>
-                        <input value={username} onChange={e => setUsername(e.target.value)}
-                        placeholder="Digite seu username" type="text"/>
-                        <button style={{
-                            backgroundColor: username ? "#4cd62b" : "#4953b8"
-                        }}>
+                        <div className={styles.sign}>
+                            Entrar com o github
+                        </div>
+                        <button type="button" style={{ backgroundColor: "#4cd62b" }} onClick={login}>
                             <FaArrowRight color='white' size={20} />
                         </button>
                     </div>
