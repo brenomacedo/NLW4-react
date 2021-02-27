@@ -9,6 +9,7 @@ import CountdownProvider from "../contexts/CountdownContext";
 import { GetServerSideProps } from "next";
 import ChallangesProvider from "../contexts/ChallangesContext";
 import Sidebar from "../components/Sidebar";
+import { getSession } from "next-auth/client";
 
 interface HomeProps {
   level: number
@@ -23,7 +24,6 @@ export default function Home({ level, currentExperience, challangesCompleted }: 
       <ChallangesProvider initialLevel={level} initialCurrentExperience={currentExperience}
       initialChallangesCompleted={challangesCompleted}>
         <div className={styles.container}>
-
           <Head>
             <title>Inicio | Move it</title>
           </Head>
@@ -47,9 +47,21 @@ export default function Home({ level, currentExperience, challangesCompleted }: 
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
-  const { level, currentExperience, challangesCompleted } = context.req.cookies
+  const session = await getSession(ctx)
+
+  if(!session) {
+    ctx.res.setHeader('location', '/')
+    ctx.res.statusCode = 301
+    ctx.res.end()
+
+    return {
+      props: {}
+    }
+  }
+
+  const { level, currentExperience, challangesCompleted } = ctx.req.cookies
 
   return {
     props: {

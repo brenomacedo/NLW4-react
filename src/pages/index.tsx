@@ -1,7 +1,8 @@
 import styles from '../styles/pages/Login.module.css'
 import { FaGithub, FaArrowRight } from 'react-icons/fa'
 import Head from 'next/head'
-import { signIn } from 'next-auth/client'
+import { getSession, signIn } from 'next-auth/client'
+import { GetServerSideProps } from 'next'
 
 export default function Login() {
 
@@ -37,4 +38,20 @@ export default function Login() {
             </div>
         </div>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+
+    const session = await getSession(ctx)
+
+    if(session) {
+        ctx.res.setHeader('location', '/home')
+        ctx.res.statusCode = 301
+        ctx.res.end()
+    }
+
+    return {
+        props: {}
+    }
+    
 }
