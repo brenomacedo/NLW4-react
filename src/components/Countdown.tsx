@@ -37,6 +37,7 @@ export default function Countdown() {
                 isActive ? (
                     <button type="button" onClick={resetCountdown}
                     className={`${styles.start} ${styles.active} ${styles.buttonContainer}`}>
+                        <div className={styles.progress} style={{ width: `${100 - ((minutes*60 + seconds)*100 / 30)}%` }}></div>
                         <div className={`${styles.buttonAbove} ${styles.BAStop}`}>
                             Abandonar ciclo <FaTimes color='#e83f5b' size={20} style={{ marginLeft: 10 }} />
                         </div>
