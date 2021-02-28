@@ -1,23 +1,34 @@
 import styles from '../styles/components/LeaderboardItem.module.css'
 
-export default function LeaderboardItem() {
+interface LeaderboardItemProps {
+    name: string
+    completedChallanges: number
+    totalExperience: number
+    level: number
+    position: number
+    image: string
+}
+
+export default function LeaderboardItem({ name, completedChallanges,
+    totalExperience, level, position, image }: LeaderboardItemProps) {
     return (
         <div className={styles.container}>
             <div className={styles.level}>
-                1
+                {position}
             </div>
             <div className={styles.user}>
-                <div className={styles.userPicture}></div>
+                <div className={styles.userPicture}
+                style={{ backgroundImage: `url('${image}')` }}></div>
                 <div className={styles.userDescription}>
-                    <p>Breno Macêdo</p>
-                    <span><img src="/icons/level.svg" alt=""/> Level 50</span>
+                    <p>{name}</p>
+                    <span><img src="/icons/level.svg" alt=""/> Level {level}</span>
                 </div>
             </div>
             <div className={styles.challanges}>
-                <p><strong>9999</strong> completados</p>
+                <p><strong>{completedChallanges}</strong> completados</p>
             </div>
             <div className={styles.xp}>
-            <p><strong>15500</strong> xp</p>
+            <p><strong>{totalExperience}</strong> xp</p>
             </div>
         </div>
     )

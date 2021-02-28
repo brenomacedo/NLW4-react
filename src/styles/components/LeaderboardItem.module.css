@@ -34,7 +34,8 @@
     width: 64px;
     height: 64px;
     border-radius: 32px;
-    background-color: red;
+    background-size: cover;
+    background-position: center;
 }
 
 .userDescription {

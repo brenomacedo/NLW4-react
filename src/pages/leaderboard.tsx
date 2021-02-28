@@ -2,10 +2,34 @@ import Sidebar from '../components/Sidebar'
 import LeaderboardItem from '../components/LeaderboardItem'
 import styles from '../styles/pages/Leaderboard.module.css'
 import Head from 'next/head'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, GetStaticProps } from 'next'
 import { getSession } from 'next-auth/client'
+import api from '../services/api'
+import axios from 'axios'
 
-export default function Leaderboard() {
+
+interface User {
+    name: string
+    completedChallanges: number
+    totalExperience: number
+    level: number
+    image: string
+}
+
+interface LeaderboardProps {
+    leaderboard: User[]
+}
+
+export default function Leaderboard({ leaderboard }: LeaderboardProps) {
+
+    function renderItems() {
+        return leaderboard.map((item, index) => (
+            <LeaderboardItem completedChallanges={item.completedChallanges} name={item.name}
+            totalExperience={item.totalExperience} level={item.level} position={index + 1}
+            image={item.image} />
+        ))
+    }
+
     return (
         <div className={styles.leaderboardContainer}>
             <Head>
@@ -23,11 +47,7 @@ export default function Leaderboard() {
                             <p className={styles.xp}>Experiência</p>
                         </div>
                         <div className={styles.tableBody}>
-                            <LeaderboardItem />
-                            <LeaderboardItem />
-                            <LeaderboardItem />
-                            <LeaderboardItem />
-                            <LeaderboardItem />
+                            {renderItems()}
                         </div>
                     </div>
                 </div>
@@ -36,20 +56,12 @@ export default function Leaderboard() {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const session = await getSession(ctx)
+export const getStaticProps: GetStaticProps = async () => {
 
-    if(!session) {
-        ctx.res.setHeader('location', '/')
-        ctx.res.statusCode = 301
-        ctx.res.end()
-
-        return {
-            props: {}
-        }
-    }
-
+    const leaderboard = await axios.get('http://localhost:3000/api/leaderboard')
     return {
-        props: {}
+        props: {
+            leaderboard: leaderboard.data
+        }
     }
 }
