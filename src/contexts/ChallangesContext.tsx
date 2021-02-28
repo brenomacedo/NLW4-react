@@ -2,6 +2,9 @@ import { createContext, FC, useEffect, useState } from 'react'
 import challanges from '../../challanges.json'
 import cookies from 'js-cookie'
 import LevelUpModal from '../components/LevelUpModal'
+import { PrismaClient } from '@prisma/client'
+import { userInfo } from 'os'
+import api from '../services/api'
 
 interface Challange {
     type: 'body' | 'eye'
@@ -26,11 +29,13 @@ interface ChallangesProviderData {
     initialLevel: number
     initialCurrentExperience: number
     initialChallangesCompleted: number
+    sub: string
 }
 
 const ChallangesContext = createContext<ChallangesContextData>({} as any)
 
-const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel, initialCurrentExperience, initialChallangesCompleted }) => {
+const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel,
+    initialCurrentExperience, initialChallangesCompleted, sub }) => {
 
     const [level, setLevel] = useState(initialLevel ?? 1)
     const [currentExperience, setCurrentExperience] = useState(initialCurrentExperience ?? 0)
@@ -47,9 +52,19 @@ const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel,
     }, [])
 
     useEffect(() => {
-        cookies.set('level', `${level}`)
-        cookies.set('currentExperience', `${currentExperience}`)
-        cookies.set('challangesCompleted', `${challangesCompleted}`)
+
+        async function updateUser() {
+            
+            await api.put('api/user', {
+                sub, level, currentExperience, challangesCompleted
+            })
+
+            console.log('ATUALIZDDO!')
+
+        }
+
+        updateUser()
+
     }, [level, currentExperience, challangesCompleted])
 
     function startNewChallange() {
