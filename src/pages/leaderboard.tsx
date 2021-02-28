@@ -6,6 +6,7 @@ import { GetServerSideProps, GetStaticProps } from 'next'
 import { getSession } from 'next-auth/client'
 import api from '../services/api'
 import axios from 'axios'
+import { PrismaClient } from '@prisma/client'
 
 
 interface User {
@@ -58,10 +59,18 @@ export default function Leaderboard({ leaderboard }: LeaderboardProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
 
-    const leaderboard = await axios.get('http://localhost:3000/api/leaderboard')
+    const prisma = new PrismaClient()
+
+    const leaderboard = await prisma.user.findMany({
+        orderBy: {
+            totalExperience: 'desc'
+        }
+    })
+
+    
     return {
         props: {
-            leaderboard: leaderboard.data
+            leaderboard: leaderboard
         }
     }
 }
