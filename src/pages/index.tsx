@@ -7,7 +7,7 @@ import { GetServerSideProps } from 'next'
 export default function Login() {
 
     function login() {
-        signIn('github')
+        signIn('github', { callbackUrl: `${process.env.BASE_URL}/home` })
     }
     
     return (
