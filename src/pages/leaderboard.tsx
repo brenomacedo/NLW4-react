@@ -4,7 +4,6 @@ import styles from '../styles/pages/Leaderboard.module.css'
 import Head from 'next/head'
 import { GetServerSideProps, GetStaticProps } from 'next'
 import { getSession } from 'next-auth/client'
-import api from '../services/api'
 import axios from 'axios'
 import { PrismaClient } from '@prisma/client'
 
@@ -67,7 +66,7 @@ export const getStaticProps: GetStaticProps = async () => {
         }
     })
 
-    
+
     return {
         props: {
             leaderboard: leaderboard
