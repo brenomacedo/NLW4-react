@@ -15,11 +15,14 @@
     background: var(--white);
     width: 100%;
     max-width: 400px;
-    padding: 2rem 3rem;
     border-radius: 5px;
     box-shadow: 0 0 60 rgba(0,0,0,0.05);
     text-align: center;
     position: relative;
+}
+
+.subContainer {
+    padding: 2rem 3rem;
 }
 
 .container header {
@@ -48,4 +51,19 @@
     background: transparent;
     border: 0;
     font-size: 0;
+}
+
+.share {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 80px;
+    font-size: 16px;
+    color: var(--blue-twitter);
+    border-top: 1px solid var(--text-highlight);
+    cursor: pointer;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }

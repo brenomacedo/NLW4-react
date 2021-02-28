@@ -1,9 +1,7 @@
 import { createContext, FC, useEffect, useState } from 'react'
 import challanges from '../../challanges.json'
-import cookies from 'js-cookie'
+import CompletedChallanges from '../components/CompletedChallanges'
 import LevelUpModal from '../components/LevelUpModal'
-import { PrismaClient } from '@prisma/client'
-import { userInfo } from 'os'
 import api from '../services/api'
 
 interface Challange {
@@ -58,8 +56,6 @@ const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel,
             await api.put('api/user', {
                 sub, level, currentExperience, challangesCompleted
             })
-
-            console.log('ATUALIZDDO!')
 
         }
 
@@ -120,7 +116,8 @@ const ChallangesProvider:FC<ChallangesProviderData> = ({ children, initialLevel,
         completeChallange, closeModal }}>
             {children}
 
-            {isModalOpen && <LevelUpModal />}
+            {isModalOpen && <LevelUpModal level={level} completedChallanges={challangesCompleted}
+            currentExperience={currentExperience} />}
         </ChallangesContext.Provider>
     )
 }
