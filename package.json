@@ -15,8 +15,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-icons": "^4.2.0",
-    "sqlite3": "^5.0.2",
-    "typeorm": "^0.2.31"
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",

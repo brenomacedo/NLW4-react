@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import ChallangesProvider from '../contexts/ChallangesContext'
 import '../styles/global.css'
 

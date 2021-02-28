@@ -32,7 +32,7 @@ export default function Home({ level, currentExperience, challangesCompleted }: 
           <CountdownProvider>
             <section>
               <div>
-                <Profile />
+                <Profile name='breno' image='brenogamer'/>
                 <CompletedChallanges />
                 <Countdown />
               </div>
